@@ -287,19 +287,21 @@ bool ModeThrow::throw_detected()
     const bool height_within_params = (g.throw_altitude_min == 0 || altitude_above_home > g.throw_altitude_min) && (g.throw_altitude_max == 0 || (altitude_above_home < g.throw_altitude_max));
 
     // High velocity or free-fall combined with increasing height indicate a possible air-drop or throw release  
-    bool possible_throw_detected = (free_falling || high_speed) && changing_height && no_throw_action && height_within_params;
+    //bool possible_throw_detected = (free_falling || high_speed) && changing_height && no_throw_action && height_within_params;
+    bool possible_throw_detected = (free_falling || high_speed) && changing_height;
 
 
     // Record time and vertical velocity when we detect the possible throw
-    if (possible_throw_detected && ((AP_HAL::millis() - free_fall_start_ms) > 500)) {
+   /* if (possible_throw_detected && ((AP_HAL::millis() - free_fall_start_ms) > 500)) {
         free_fall_start_ms = AP_HAL::millis();
         free_fall_start_velz = inertial_nav.get_velocity_z_up_cms();
     }
 
     // Once a possible throw condition has been detected, we check for 2.5 m/s of downwards velocity change in less than 0.1 seconds to confirm --EDITED TLP
-    bool throw_condition_confirmed = ((AP_HAL::millis() - free_fall_start_ms < 100) && ((inertial_nav.get_velocity_z_up_cms() - free_fall_start_velz) < -250.0f));
+   // bool throw_condition_confirmed = ((AP_HAL::millis() - free_fall_start_ms < 100) && ((inertial_nav.get_velocity_z_up_cms() - free_fall_start_velz) < -250.0f));
 
     // start motors and enter the control mode if we are in continuous freefall
+    */
     return throw_condition_confirmed;
 }
 
